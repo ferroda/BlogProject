@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Blog.BlogPost>
+
+@{
+    ViewBag.Title = "Eddig megírt blog témáink";
+}
+@* Alert message, when a post saved *@
+
+<div id="alertMessage" class="alert alert-success messageBoxes @TempData["postSaved"]">
+    A posztodat elmentettük!
+</div>
+
+<h2>Válogass a bejegyzéseink között és írd meg te is a saját ötletedet!</h2>
+
+
+<input type="text" id="searchBox" onkeyup="searching()" placeholder="Keresés cím szerint..">
+
+@* Table section *@
+<div class="table-responsive">
+<table id="tableSearch" class="table">
+    <tr>
+        <th>
+            A blog szerzője
+        </th>
+        <th>
+            A blog címe
+        </th>
+        <th>
+            A blog szövege
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <!--Here I used ActionLinks for appearing the content.-->
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.ActionLink(item.Title, "ReadPost", "BlogManage", new { Id = item.Id }, null)
+            </td>
+            <td>
+                @if (item.Text.Length >= 30)
+                {
+                    @(item.Text.Substring(0, 30) + "...")
+                }
+                else
+                {
+                    @item.Text;
+                }
+            <td>
+                <div id="fb-root"></div>
+                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            </td>
+
+            @if (Session["Id"]?.ToString() == item.UserId.ToString()) //Show only Edit and Delete, when logged in.
+            {
+                <td>
+                    @Html.ActionLink("Szerkesztés", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Törlés", "Delete", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+</table>
+</div>

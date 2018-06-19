@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="content">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<a href="../Home"><div class="logo"></div></a>
+                        @Html.ActionLink("BlogNév", "Index", "Home", new { area = "" }, new { @class = "asd navbar-brand" })*@
+                    <a href="@Url.Action("Index", "Home", null)" class="navbar-brand">
+                    <img width="70" height="70" src="/Content/logo.png">
+                        Dblog
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Blog posztok", "BlogList", "BlogManage")</li>
+                        <li>@Html.ActionLink("Új blog poszt", "Create", "BlogManage")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container body-content">
+
+            @RenderBody()
+        </div>
+    </div>
+    <footer class="footer">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <h4>Cím</h4>
+                <ul class="ulSettings">
+                    <li>H-0000 Valamilyen utca 5.</li>
+                    <li>Város, Megye</li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <h4>Kapcsolat</h4>
+                <ul class="ulSettings">
+                    <li>Email: blognev@blog.hu</li>
+                    <li>Tel: +(36) 01234-5678</li>
+                    <li>Skype: blog</li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <h4>Linkek</h4>
+                <ul class="ulSettings">
+                    <li><a href="https://reaktorlabs.com/" target="_blank">Reaktorlabs.com</a></li>
+                    <li><a href="http://www.oszk.hu/" target="_blank">Oszk.hu</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </footer>
+    <div id="fb-root"></div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/ItemChanger.js")
+    @Scripts.Render("~/Scripts/MessageForUser.js")
+    @Scripts.Render("~/Scripts/SearchBarJs.js")
+    @Scripts.Render("~/Scripts/FbLikeButton.js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

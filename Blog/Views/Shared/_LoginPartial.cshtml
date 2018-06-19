@@ -1,0 +1,21 @@
+﻿@if (Session["Id"] != null)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <!--EMAIL ÁTÍRÁSA NÉVRE-->
+            @Html.ActionLink("Üdvözlünk a Dblog-on " + Session["UserName"] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li>@Html.ActionLink("Kijelentkezés", "ExitSession", "BlogManage")</li>
+    </ul>
+    }
+    
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Regisztráció", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Belépés", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

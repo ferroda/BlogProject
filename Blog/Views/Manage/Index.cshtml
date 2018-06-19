@@ -1,0 +1,26 @@
+﻿@model Blog.Models.IndexViewModel
+@{
+    ViewBag.Title = "Fiókbeállítások";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Jelszó:</dt>
+        <dd>
+            
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Jelszóváltoztatás", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            
+        </dd>
+    </dl>
+</div>

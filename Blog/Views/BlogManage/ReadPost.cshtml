@@ -1,0 +1,16 @@
+﻿@model Blog.BlogPost
+@{
+    ViewBag.Title = Model.Title;
+}
+<h2>@Model.Title</h2>
+<div class="originalBlogPost-wrapper">
+    @* Using inline style in here, because I cannot access Model in CSS. *@
+    <div class="ReadPostSection" style="color: @Model.Color.Name; background-color: @Model.Color1.Name; font-size: @Model.FontSize;">
+
+        @if (ViewBag.SourceString != null)
+        {
+            <img id="addedImgSettings" src="@ViewBag.SourceString" />
+        }
+        @Model.Text
+    </div>
+</div>

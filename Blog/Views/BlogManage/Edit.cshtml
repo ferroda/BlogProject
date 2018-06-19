@@ -1,0 +1,88 @@
+﻿@model Blog.BlogPost
+
+@{
+    /**/
+
+    ViewBag.Title = "Blog szerkesztés";
+}
+
+<h3>Szerkeszd át blogodat kedved szerint</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="createForm">
+        @Html.ValidationSummary(true)
+
+        <div class="row">
+            <div class="col-xs-2 text-center">
+                <div class="form-check">
+                    <h4>Publikus bejegyzés</h4>
+                    @Html.CheckBox("IsVisible", Model.IsVisible.HasValue? Model.IsVisible : false)
+                </div>
+            </div>
+            <div class="col-xs-2 text-center">
+                <div class="form-group">
+                    <div class="textSize col-10">
+                        <h4>Szöveg méret (px)</h4>
+                        @Html.TextBoxFor(model => model.FontSize, new { value = 12, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FontSize, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 text-center">
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        <h4>Szöveg szín</h4>
+                        @Html.DropDownListFor(m => m.FontColorId, (SelectList)ViewBag.FontColorId)
+                        @Html.ValidationMessageFor(m => m.FontColorId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-2 text-center">
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        <h4>Háttér szín</h4>
+                        @Html.DropDownListFor(m => m.BackgroundColorId, (SelectList)ViewBag.BackgroundColorId)
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4 text-center">
+                <fieldset>
+                    <h4>Kép feltöltés..</h4>
+                    <div class="editor-field">
+                        <input class="btnSettings" id="DataInHttpPostedFileBase" title="Töltsd fel képet"
+                               type="file" name="DataInHttpPostedFileBase" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-12">
+                <div class="form-group">
+                    <h4>Add meg a blog címét</h4>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <h4>És a blog szövegét</h4>
+                    @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Vissza a listához", "BlogList")
+</div>
